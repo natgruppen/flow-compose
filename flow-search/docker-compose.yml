@@ -43,6 +43,7 @@ services:
       - traefik.http.routers.Flow-Search.entrypoints=https
       - traefik.http.routers.Flow-Search.rule=PathPrefix(`/api/search`) && Host(`${FLOW_DOMAIN}`)
       - traefik.http.routers.Flow-Search.tls=true
+      - traefik.http.routers.Flow-Search.tls.certresolver=letsencrypt
       - traefik.http.services.Flow-Search.loadbalancer.server.port=8081
     environment:
       - TZ=${TZ}

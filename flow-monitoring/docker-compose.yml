@@ -12,6 +12,7 @@ services:
       - traefik.http.routers.Flow-Monitoring.entrypoints=https
       - traefik.http.routers.Flow-Monitoring.rule=PathPrefix(`/api/monitoring`) && Host(`${FLOW_DOMAIN}`)
       - traefik.http.routers.Flow-Monitoring.tls=true
+      - traefik.http.routers.Flow-Monitoring.tls.certresolver=letsencrypt
       - traefik.http.services.Flow-Monitoring.loadbalancer.server.port=80      
     environment:
       - TZ=${TZ}

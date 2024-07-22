@@ -21,6 +21,7 @@ services:
       - traefik.http.routers.Metabase.entrypoints=https
       - traefik.http.routers.Metabase.rule=Host(`${METABASE_DOMAIN}`)
       - traefik.http.routers.Metabase.tls=true
+      - traefik.http.routers.Metabase.tls.certresolver=letsencrypt
       - traefik.http.services.Metabase.loadbalancer.server.port=80  
     depends_on:
       - postgresql

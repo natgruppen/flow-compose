@@ -13,6 +13,7 @@ services:
       - traefik.http.routers.Flow-Product.entrypoints=https
       - traefik.http.routers.Flow-Product.rule=PathPrefix(`/api/product`) && Host(`${FLOW_DOMAIN}`)
       - traefik.http.routers.Flow-Product.tls=true
+      - traefik.http.routers.Flow-Product.tls.certresolver=letsencrypt
       - traefik.http.services.Flow-Product.loadbalancer.server.port=80      
     environment:
       - TZ=${TZ}
