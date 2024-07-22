@@ -20,4 +20,7 @@ services:
       - traefik.http.routers.Flow-Event.tls=true
       - traefik.http.services.Flow-Event.loadbalancer.server.port=80
     depends_on:
-      - flow-auth
+      flow-auth:
+        condition: service_started
+      deepstream:
+        condition: service_healthy

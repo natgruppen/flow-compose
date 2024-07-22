@@ -1,0 +1,22 @@
+services:
+  flow-monitoring:
+    container_name: flow-monitoring
+    image: ${REPOSITORY}/flow-monitoring:${FLOW_VERSION}
+    hostname: flow.monitoring
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Monitoring.entrypoints=https
+      - traefik.http.routers.Flow-Monitoring.rule=PathPrefix(`/api/monitoring`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Monitoring.tls=true
+      - traefik.http.services.Flow-Monitoring.loadbalancer.server.port=80      
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+      - MIBDIRS=$HOME/.snmp/mibs:mibs:/usr/share/snmp/mibs:$HOME/.snmp/mibs/ietf:$HOME/.snmp/mibs/iana
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/monitoring:/data

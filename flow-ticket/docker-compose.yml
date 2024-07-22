@@ -20,4 +20,7 @@ services:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/ticket:/data
     depends_on:
-      - flow-auth
+      flow-auth:
+        condition: service_started
+      deepstream:
+        condition: service_healthy

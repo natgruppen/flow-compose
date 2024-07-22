@@ -15,14 +15,13 @@ services:
       - traefik.http.routers.Flow-Product.tls=true
       - traefik.http.services.Flow-Product.loadbalancer.server.port=80      
     environment:
-      - SERVICE_PORTS=80
-      - VIRTUAL_HOST=http://*/api/product/*,https://*/api/product/*
-      - FORCE_SSL=true
-      - VIRTUAL_HOST_WEIGHT=10
       - TZ=${TZ}
       - JAVA_OPTS=${JAVA_OPTS}
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/product:/data
     depends_on:
-      - flow-auth
+      flow-auth:
+        condition: service_started
+      deepstream:
+        condition: service_healthy

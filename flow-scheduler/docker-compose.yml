@@ -20,7 +20,10 @@ services:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/scheduler:/data
     depends_on:
-      - flow-auth
+      flow-auth:
+        condition: service_started
+      deepstream:
+        condition: service_healthy
 
   flow-runner:
     container_name: flow-runner
@@ -44,4 +47,7 @@ services:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/scheduler:/data
     depends_on:
-      - flow-auth      
+      flow-auth:
+        condition: service_started
+      deepstream:
+        condition: service_healthy  

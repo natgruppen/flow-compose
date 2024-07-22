@@ -1,8 +1,7 @@
-
 include:
 #  - portainer/docker-compose.yml
-  - traefik/docker-compose.yml
-  - postgresql/docker-compose.yml
+#  - traefik/docker-compose.yml
+
 #  - metabase/docker-compose.yml
 #  - grafana/docker-compose.yml
 

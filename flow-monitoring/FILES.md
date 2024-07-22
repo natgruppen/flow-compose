@@ -1,0 +1,1 @@
+files/flow_monitoring.conf => $PREFIX/srv/docker/flow/config/monitoring.conf

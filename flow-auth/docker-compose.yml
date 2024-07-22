@@ -7,11 +7,12 @@ services:
     networks:
       - flow
       - traefik
-    ports:
-      - 8000:8000
+    # ports:
+    #   - 8000:8000
     environment:
       - TZ=${TZ}
       - JAVA_OPTS=${JAVA_OPTS}
+      # - EXCLUDE_PORTS=8000
     labels:
       - traefik.enable=true
       - traefik.http.routers.Flow-Auth.entrypoints=https
@@ -21,7 +22,10 @@ services:
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/auth:/data
-    healthcheck:
-      disable: true
+ #   healthcheck:
+ #     disable: true
     depends_on:
-      - postgresql
+      postgresql:
+        condition: service_started
+#      deepstream:
+#        condition: service_healthy

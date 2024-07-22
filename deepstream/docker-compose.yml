@@ -18,6 +18,14 @@ services:
       - traefik.http.services.Deepstream.loadbalancer.server.port=6020
     volumes:
       - /srv/docker/deepstream:/etc/deepstream
+    healthcheck:
+      test: wget -q -O /dev/null localhost:6020/health-check 
+      interval: 1m30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
     depends_on:
-      - flow-auth
-      - rethinkdb
+#      flow-auth:
+#        condition: service_started
+      rethinkdb:
+        condition: service_started
