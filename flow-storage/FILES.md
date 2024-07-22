@@ -1,0 +1,1 @@
+files/flow_storage.conf => $PREFIX/srv/docker/flow/config/storage.conf

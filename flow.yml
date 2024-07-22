@@ -1,0 +1,59 @@
+name: flow
+
+include:
+  - common.yml
+  - rethinkdb/docker-compose.yml
+  - deepstream/docker-compose.yml
+  - flow-auth/docker-compose.yml
+  - flow-event/docker-compose.yml
+  - flow-gui/docker-compose.yml
+  - flow-scheduler/docker-compose.yml
+  - flow-search/docker-compose.yml
+  - flow-log/docker-compose.yml
+  - flow-storage/docker-compose.yml
+  - flow-inventory/docker-compose.yml
+  - flow-address/docker-compose.yml 
+  - flow-customer/docker-compose.yml
+  - flow-product/docker-compose.yml
+  - flow-billing/docker-compose.yml
+  - flow-ticket/docker-compose.yml
+
+# Portainer
+# HAProxy
+# Traefik
+# FLOW
+#FLOWAUTH
+# Flow-Auth
+# Postgresql
+# Metabase
+# Grafana
+# RethinkDB
+# Deepstream
+#FLOWEVENT
+# Flow-Event
+#FLOWGUI
+# Flow-GUI
+#FLOWSCHEDULER
+# Flow-Scheduler
+# Flow-Runner
+#FLOWSEARCH
+# Flow-Search
+# Flow-Search-8
+# Flow-Search-Rest
+#FLOWLOG
+# Flow-Log
+# Logstash
+#FLOWSTORAGE
+# Flow-Storage
+#FLOWINVENTORY
+# Flow-Inventory
+#FLOWADDRESS
+# Flow-Address
+#FLOWCUSTOMER
+# Flow-Customer
+#FLOWPRODUCT
+# Flow-Product
+#FLOWBILLING
+# Flow-Billing
+#FLOWTICKET
+# Flow-Ticket

@@ -1,0 +1,23 @@
+services:
+  flow-billing:
+    container_name: flow-billing
+    image: ${REPOSITORY}/flow-billing:${FLOW_VERSION}
+    hostname: flow.billing
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Billing.entrypoints=https
+      - traefik.http.routers.Flow-Billing.rule=PathPrefix(`/api/billing`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Billing.tls=true
+      - traefik.http.services.Flow-Billing.loadbalancer.server.port=80    
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/billing:/data
+    depends_on:
+      - flow-auth

@@ -1,0 +1,26 @@
+services:
+  metabase:
+    image: metabase/metabase:v0.47.4
+    container_name: metabase
+    hostname: metabase
+    restart: unless-stopped
+    networks:
+      - traefik
+      - flow
+    environment:
+      - JAVA_TIMEZONE=${TZ}
+      - TZ=${TZ}
+      - MD_B_TYPE=postgres
+      - MD_DB_DBNAME=metabase
+      - MD_DB_PORT="5432"
+      - MD_DB_USER=${DATABASE_USER}
+      - MD_DB_PASS=${DATABASE_PASSWORD}
+      - MD_DB_HOST=${HOST_IP}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Metabase.entrypoints=https
+      - traefik.http.routers.Metabase.rule=Host(`metabase.test.kurbit.se`)
+      - traefik.http.routers.Metabase.tls=true
+      - traefik.http.services.Metabase.loadbalancer.server.port=80  
+    depends_on:
+      - postgresql

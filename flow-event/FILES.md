@@ -1,0 +1,1 @@
+files/flow_event.conf => $PREFIX/srv/docker/flow/config/event.conf

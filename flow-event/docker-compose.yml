@@ -1,0 +1,23 @@
+services:
+  flow-event:
+    container_name: flow-event
+    image: ${REPOSITORY}/flow-event:${FLOW_VERSION}
+    hostname: flow.event
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/event:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Event.entrypoints=https
+      - traefik.http.routers.Flow-Event.rule=PathPrefix(`/api/event`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Event.tls=true
+      - traefik.http.services.Flow-Event.loadbalancer.server.port=80
+    depends_on:
+      - flow-auth

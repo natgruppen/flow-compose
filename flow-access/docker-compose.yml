@@ -1,0 +1,43 @@
+services:
+  flow-access:
+    container_name: flow-access
+    # Revert to 2024.1.1 for on-api 2.3
+    image: ${REPOSITORY}/flow-access:2024.1.1
+    hostname: flow.access
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Access.entrypoints=https
+      - traefik.http.routers.Flow-Access.rule=PathPrefix(`/api/onapi/2.3`) && Host(`${ACCESS_DOMAIN}`)
+      - traefik.http.routers.Flow-Access.tls=true
+      - traefik.http.services.Flow-Access.loadbalancer.server.port=8080
+    environment:
+      - NA_INTEGRATION=0
+      - FLOW_INTEGRATION=1
+      - PASSWORD_RECOVERY_ENABLED=1
+      - TICKETS_ENABLED=1
+      - BILLING_EXPORT_ENABLED=1
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+
+  # flow-gui-access:
+  #   container_name: flow-gui-access
+  #   image: ${REPOSITORY}/flow-gui-access:${FLOW_VERSION}
+  #   restart: unless-stopped
+  #   networks:
+  #     - flow
+  #     - haproxy
+  #   environment:
+  #     #- SERVICE_PORTS=80
+  #     - VIRTUAL_HOST=http://access.*,https://access.*
+  #     - FORCE_SSL=true
+  #     - VIRTUAL_HOST_WEIGHT=1
+  #     - TZ=${TZ}
+  #   volumes:
+  #     - /srv/docker/flow/config:/etc/flow
+  #     - /srv/docker/flow/gui:/data

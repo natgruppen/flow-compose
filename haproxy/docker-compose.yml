@@ -1,0 +1,41 @@
+services:
+  haproxy:
+    image: dockercloud/haproxy:latest
+    container_name: haproxy
+    restart: unless-stopped
+    networks:
+      - haproxy
+    ports:
+      - 80:80
+      - 443:443
+      - 8002:8002
+      - 8003:8003
+      - 9090:9090
+    volumes:
+      - ${PREFIX}/srv/docker/haproxy/certs:/certs
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - CERT_FOLDER=/certs/
+      - DEFAULT_SSL_CERT=
+      - TIMEOUT=connect 5000, client 120000, server 120000
+      - ADDITIONAL_SERVICES=flow:metabase,flow:deepstream,flow:flow-auth,flow:flow-event,flow:flow-gui,flow:flow-scheduler,flow:flow-runner,flow:flow-search-rest,flow:flow-log,flow:flow-storage,flow:flow-inventory,flow:flow-address,flow:flow-customer,flow:flow-product,flow:flow-billing,flow:flow-ticket,flow:access,flow:access-gui:flow:flow-access
+    depends_on:
+#      - metabase
+      - deepstream
+      - flow-auth
+      - flow-event
+      - flow-gui
+      - flow-log
+      - flow-scheduler
+      - flow-runner
+      - flow-search-rest
+      - flow-storage
+      - flow-inventory
+      - flow-address
+      - flow-customer
+      - flow-product
+      - flow-billing
+      - flow-ticket
+      - access
+      - access-gui
+      - flow-access

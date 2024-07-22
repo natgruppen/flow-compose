@@ -1,0 +1,23 @@
+services:
+  flow-ticket:
+    container_name: flow-ticket
+    image: ${REPOSITORY}/flow-ticket:${FLOW_VERSION}
+    hostname: flow.ticket
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Ticket.entrypoints=https
+      - traefik.http.routers.Flow-Ticket.rule=PathPrefix(`/api/ticket`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Ticket.tls=true
+      - traefik.http.services.Flow-Ticket.loadbalancer.server.port=80        
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/ticket:/data
+    depends_on:
+      - flow-auth

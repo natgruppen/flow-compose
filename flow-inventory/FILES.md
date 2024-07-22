@@ -1,0 +1,1 @@
+files/flow_inventory.conf => $PREFIX/srv/docker/flow/config/inventory.conf

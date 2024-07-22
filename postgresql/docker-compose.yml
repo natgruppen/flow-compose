@@ -1,0 +1,14 @@
+services:
+  postgresql:
+    image: ${REPOSITORY}/postgres:9.6
+    container_name: postgresql
+    hostname: postgresql
+    restart: unless-stopped
+    networks:
+      - flow
+    ports:
+      - 5432:5432
+    volumes:
+      - ${PREFIX}/srv/docker/postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_MASTER_PASSWORD}

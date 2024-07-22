@@ -1,0 +1,28 @@
+services:
+  flow-product:
+    container_name: flow-product
+    # Revert to 2024.1.1 for on-api 2.3
+    image: ${REPOSITORY}/flow-product:2024.1.1
+    hostname: flow.product
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Product.entrypoints=https
+      - traefik.http.routers.Flow-Product.rule=PathPrefix(`/api/product`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Product.tls=true
+      - traefik.http.services.Flow-Product.loadbalancer.server.port=80      
+    environment:
+      - SERVICE_PORTS=80
+      - VIRTUAL_HOST=http://*/api/product/*,https://*/api/product/*
+      - FORCE_SSL=true
+      - VIRTUAL_HOST_WEIGHT=10
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/product:/data
+    depends_on:
+      - flow-auth

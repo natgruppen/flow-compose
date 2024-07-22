@@ -1,0 +1,1 @@
+files/flow_scheduler.conf => $PREFIX/srv/docker/flow/config/scheduler.conf

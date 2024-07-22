@@ -1,0 +1,23 @@
+services:
+  traefik:
+    image: traefik:2.4
+    container_name: traefik
+    restart: unless-stopped
+    networks:
+      - traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8002:8002
+      - 8003:8003
+      - 9090:9090
+    environment:
+      - AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
+      - AZURE_TENANT_ID=${AZURE_TENANT_ID}
+      - AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID}
+      - AZURE_RESOURCE_GROUP=${AZURE_SUBSCRIPTION_ID}
+      - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
+      - TZ=${TZ}
+    volumes:
+      - /srv/docker/traefik:/etc/traefik
+      - /var/run/docker.sock:/var/run/docker.sock      

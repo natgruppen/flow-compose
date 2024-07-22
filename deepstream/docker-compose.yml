@@ -1,0 +1,23 @@
+services:
+  deepstream:
+    container_name: deepstream
+    image: ${REPOSITORY}/bitvis.io-deepstream:2.3.6
+    hostname: deepstream
+    restart: unless-stopped
+    #environment:
+    networks:
+      - flow
+      - traefik
+    ports:
+      - 6020:6020
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Deepstream.entrypoints=https
+      - traefik.http.routers.Deepstream.rule=PathPrefix(`/deepstream`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Deepstream.tls=true
+      - traefik.http.services.Deepstream.loadbalancer.server.port=6020
+    volumes:
+      - /srv/docker/deepstream:/etc/deepstream
+    depends_on:
+      - flow-auth
+      - rethinkdb

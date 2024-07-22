@@ -1,0 +1,22 @@
+services:
+  flow-gui:
+    container_name: flow-gui
+    image: ${REPOSITORY}/flow-gui-logic:${FLOW_VERSION}
+    hostname: flow.gui
+    restart: unless-stopped
+    networks:
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-GUI.entrypoints=https
+      - traefik.http.routers.Flow-GUI.rule=Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-GUI.tls=true
+      - traefik.http.services.Flow-GUI.loadbalancer.server.port=80
+    #--container-label traefik.http.routers.Flow-GUI-unsecure.entrypoints="http" \
+    #--container-label traefik.http.routers.Flow-GUI-unsecure.rule="PathPrefix(\`/\`)" \
+    #--container-label traefik.http.routers.Flow-GUI-unsecure.middlewares="http-redirect@file" \
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/gui:/data

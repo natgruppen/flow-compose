@@ -1,0 +1,14 @@
+services:
+  rethinkdb:
+    container_name: rethinkdb
+    image: rethinkdb:latest
+    hostname: rethinkdb
+    restart: unless-stopped
+    networks:
+      - flow
+    ports:
+      - 8080:8080
+      - 28015:28015
+      - 29015:29015
+    volumes:
+      - /srv/docker/rethinkdb:/data

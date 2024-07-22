@@ -1,0 +1,31 @@
+name: access
+
+include:
+  - common.yml
+  - traefik/docker-compose.yml
+#  - portainer/docker-compose.yml
+  #- haproxy/docker-compose.yml
+  - access/docker-compose.yml
+  - flow-access/docker-compose.yml
+  #- installation/docker-compose.yml
+#  - activation/docker-compose.yml
+
+
+
+# ACCESS
+#FLOWACCESS
+# Flow-Access (Legacy)
+#FLOWGUIACCESS
+# Flow-GUI-Access (Legacy)
+#ACCESS
+# Access
+#ACCESSGUI
+# Access-GUI
+#INSTALLATION
+# Installation
+#INSTALLATIONGUI
+# Installation-GUI
+#ACTIVATION
+# Activation
+#ACTIVATIONGUI
+# Activation-GUI

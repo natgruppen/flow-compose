@@ -1,0 +1,47 @@
+services:
+  flow-scheduler:
+    container_name: flow-scheduler
+    image: ${REPOSITORY}/flow-scheduler:${FLOW_VERSION}
+    hostname: flow.scheduler
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Scheduler.entrypoints=https
+      - traefik.http.routers.Flow-Scheduler.rule=(PathPrefix(`/api/scheduler`) || PathPrefix(`/api/services`) || PathPrefix(`/api/prometheus`) ) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Scheduler.tls=true
+      - traefik.http.services.Flow-Scheduler.loadbalancer.server.port=80    
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/scheduler:/data
+    depends_on:
+      - flow-auth
+
+  flow-runner:
+    container_name: flow-runner
+    image: ${REPOSITORY}/flow-scheduler:${FLOW_VERSION}
+    hostname: flow.runner
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Runner.entrypoints=https
+      - traefik.http.routers.Flow-Runner.rule=(PathPrefix(`/api/scheduler`) || PathPrefix(`/api/services`) || PathPrefix(`/api/prometheus`) ) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Runner.tls=true
+      - traefik.http.services.Flow-Runner.loadbalancer.server.port=80    
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+      - SCHEDULER_SCHEDULER=false
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/flow/scheduler:/data
+    depends_on:
+      - flow-auth      

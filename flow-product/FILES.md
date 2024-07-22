@@ -1,0 +1,1 @@
+files/flow_product.conf => $PREFIX/srv/docker/flow/config/product.conf

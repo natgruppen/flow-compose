@@ -1,0 +1,51 @@
+services:
+  # flow-search:
+  #   container_name: flow-search
+  #   image: ${REPOSITORY}/flow-search:2024.1.0
+  #   networks:
+  #     - flow
+  #   #ports:
+  #   environment:
+  #     - TZ=${TZ}
+  #   volumes:
+  #     - /srv/docker/flow/config:/etc/flow
+  #     - /srv/docker/elasticsearch/data:/usr/share/elasticsearch/data
+  #     - /srv/docker/elasticsearch/config:/usr/share/elasticsearch/config
+  
+  flow-search-8:
+    container_name: flow-search-8
+    image: ${REPOSITORY}/flow-search:${FLOW_VERSION}
+    restart: unless-stopped
+    hostname: flow.search.8
+    networks:
+      - flow
+    ports:
+      - 9200:9200
+      - 9201:9200
+      - 9300:9300
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
+      - /srv/docker/elasticsearch8/data:/usr/share/elasticsearch/data
+      - /srv/docker/elasticsearch8/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
+  
+  flow-search-rest:
+    container_name: flow-search-rest
+    restart: unless-stopped
+    hostname: flow.search
+    image: ${REPOSITORY}/flow-search-rest:${FLOW_VERSION}
+    networks:
+      - flow
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Flow-Search.entrypoints=https
+      - traefik.http.routers.Flow-Search.rule=PathPrefix(`/api/search`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Search.tls=true
+      - traefik.http.services.Flow-Search.loadbalancer.server.port=8081
+    environment:
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
