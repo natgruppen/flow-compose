@@ -1,5 +1,5 @@
 Environment file:
-
+```
 FLOW_VERSION=2024.2.0
 REPOSITORY=bitvis.jfrog.io/docker-release
 TZ=Europe/Stockholm
@@ -11,12 +11,12 @@ DATABASE_PASSWORD=
 DATABASE_MASTER_PASSWORD=
 FLOW_DOMAIN=flow.test.kurbit.se
 ACCESS_DOMAIN=access.test.kurbit.se
-
+```
 For traefik to handle letsencrypt certificates via Azure
+```
 AZURE_CLIENT_SECRET=
 AZURE_TENANT_ID=
 AZURE_SUBSCRIPTION_ID=
 AZURE_RESOURCE_GROUP=
 AZURE_CLIENT_ID=
-
-
+```
