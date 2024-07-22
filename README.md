@@ -22,3 +22,4 @@ AZURE_SUBSCRIPTION_ID=
 AZURE_RESOURCE_GROUP=
 AZURE_CLIENT_ID=
 ```
+Start with docker compose -f flow.yml -f monitoring.yml up -d or docker compose -f access.yml up -d
