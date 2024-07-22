@@ -14,6 +14,7 @@ services:
       - traefik.http.routers.Installation.rule=PathPrefix(`/api/portal`) && Host(`${PORTAL_DOMAIN}`)
       - traefik.http.routers.Installation.tls=true
       - traefik.http.services.Installation.loadbalancer.server.port=8081
+      - traefik.http.routers.Installation.tls.certresolver=letsencrypt
     environment:
       - PASSWORD_RECOVERY_ENABLED=1
       - TICKETS_ENABLED=0
@@ -52,6 +53,7 @@ services:
       - traefik.http.routers.Installation-GUI.rule=Host(`${PORTAL_DOMAIN}`)
       - traefik.http.routers.Installation-GUI.tls=true
       - traefik.http.services.Installation-GUI.loadbalancer.server.port=80
+      - traefik.http.routers.Installation-GUI.tls.certresolver=letsencrypt      
     environment:
        - TZ=${TZ}
     volumes:
