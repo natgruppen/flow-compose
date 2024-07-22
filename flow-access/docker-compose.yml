@@ -14,6 +14,7 @@ services:
       - traefik.http.routers.Flow-Access.rule=PathPrefix(`/api/onapi/2.3`) && Host(`${ACCESS_DOMAIN}`)
       - traefik.http.routers.Flow-Access.tls=true
       - traefik.http.services.Flow-Access.loadbalancer.server.port=8080
+      - traefik.http.routers.Flow-Access.tls.certresolver=letsencrypt
     environment:
       - NA_INTEGRATION=0
       - FLOW_INTEGRATION=1
