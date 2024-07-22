@@ -15,13 +15,13 @@ services:
       - traefik.http.routers.Access.tls.certresolver=letsencrypt
       - traefik.http.services.Access.loadbalancer.server.port=8083
     environment:
-#      - VIRTUAL_HOST=http://access.*/api/onapi/2.4/*,https://access.*/api/onapi/2.4/*,http://access.*/api/onapi/settings,https://access.*/api/onapi/settings,http://access.*/api/onapi/*,https://access.*/api/onapi/*
       - ENDPOINTS_LOCATION=
       - PASSWORD_RECOVERY_ENABLED=1
       - TICKETS_ENABLED=1
       - BILLING_EXPORT_ENABLED=1
       - TZ=${TZ}
       - JAVA_OPTS=${JAVA_OPTS}
+      - FIELDMAPPER_CONFIG=/etc/flow/mapping.json
     volumes:
       - /srv/docker/flow/config:/etc/flow
 
