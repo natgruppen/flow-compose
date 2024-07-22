@@ -1,6 +1,6 @@
 services:
   traefik:
-    image: traefik:2.10
+    image: traefik:2.11
     container_name: traefik
     restart: unless-stopped
     networks:
@@ -15,7 +15,7 @@ services:
       - AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - AZURE_TENANT_ID=${AZURE_TENANT_ID}
       - AZURE_SUBSCRIPTION_ID=${AZURE_SUBSCRIPTION_ID}
-      - AZURE_RESOURCE_GROUP=${AZURE_SUBSCRIPTION_ID}
+      - AZURE_RESOURCE_GROUP=${AZURE_RESOURCE_GROUP}
       - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
       - TZ=${TZ}
     volumes:
