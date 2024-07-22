@@ -7,8 +7,8 @@ include:
   #- haproxy/docker-compose.yml
   - access/docker-compose.yml
   - flow-access/docker-compose.yml
-  #- installation/docker-compose.yml
-#  - activation/docker-compose.yml
+  - installation/docker-compose.yml
+ # - activation/docker-compose.yml
 
 
 

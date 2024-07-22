@@ -11,6 +11,8 @@ DATABASE_PASSWORD=
 DATABASE_MASTER_PASSWORD=
 FLOW_DOMAIN=flow.test.kurbit.se
 ACCESS_DOMAIN=access.test.kurbit.se
+METABASE_DOMAIN=metabase.test.kurbit.se
+PORTAL_DOMAIN=portal.test.kurbit.se
 ```
 For traefik to handle letsencrypt certificates via Azure
 ```
