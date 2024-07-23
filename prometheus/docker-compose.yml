@@ -12,9 +12,34 @@ services:
       - traefik.http.routers.Prometheus.entrypoints=prometheus
       - traefik.http.routers.Prometheus.rule=Host(`${FLOW_DOMAIN}`)
       - traefik.http.routers.Prometheus.tls=true
+      - traefik.http.routers.Prometheus.tls.certresolver=letsencrypt
       - traefik.http.services.Prometheus.loadbalancer.server.port=9090
     command: --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle --storage.tsdb.retention=${PROMETHEUS_RETENTION} --storage.tsdb.path /prometheus
     volumes:
       - /srv/docker/flow/config/prometheus:/etc/prometheus
       - /srv/docker/flow/monitoring/prometheus:/prometheus
       - /srv/docker/flow/monitoring:/etc/file_sd_configs
+
+  prometheus-snmp-exporter:
+    image: ${REPOSITORY}/snmp_exporter:${FLOW_VERSION}
+    container_name: prometheus-snmp-exporter
+    restart: unless-stopped
+    ports:
+      - 9116:9116
+    networks:
+      - flow
+    volumes:
+      - /srv/docker/flow/config/snmp_exporter:/etc/snmp_exporter
+
+  prometheus-blackbox-exporter:
+    image: prom/blackbox-exporter
+    container_name: prometheus-blackboxexporter
+    hostname: prometheus.blackboxexporter
+    restart: unless-stopped
+    ports:
+      - 9115:9115
+    networks:
+      - flow
+    volumes:
+      - /srv/docker/flow/config/blackbox_exporter:/etc/blackbox_exporter
+      - /srv/docker/flow/monitoring/blackbox_exporter:/blackbox_exporter

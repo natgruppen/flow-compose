@@ -12,9 +12,6 @@ include:
 # Prometheus-BlackboxExporter
 # Prometheus-Alertmanager
 # Prometheus
-# Prometheus-Node-Exporter
-
-
 
 #PROMETHEUSSNMPEXPORTER
 #PROMETHEUSBLACKBOXEXPORTER

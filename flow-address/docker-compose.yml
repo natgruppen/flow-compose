@@ -12,6 +12,7 @@ services:
       - traefik.http.routers.Flow-Address.entrypoints=https
       - traefik.http.routers.Flow-Address.rule=PathPrefix(`/api/address`) && Host(`${FLOW_DOMAIN}`)
       - traefik.http.routers.Flow-Address.tls=true
+      - traefik.http.routers.Flow-Address.tls.certresolver=letsencrypt
       - traefik.http.services.Flow-Address.loadbalancer.server.port=80
     environment:
       - TZ=${TZ}
