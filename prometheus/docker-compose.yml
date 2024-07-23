@@ -20,26 +20,39 @@ services:
       - /srv/docker/flow/monitoring/prometheus:/prometheus
       - /srv/docker/flow/monitoring:/etc/file_sd_configs
 
-  prometheus-snmp-exporter:
-    image: ${REPOSITORY}/snmp_exporter:${FLOW_VERSION}
-    container_name: prometheus-snmp-exporter
-    restart: unless-stopped
-    ports:
-      - 9116:9116
-    networks:
-      - flow
-    volumes:
-      - /srv/docker/flow/config/snmp_exporter:/etc/snmp_exporter
+  # prometheus-snmp-exporter:
+  #   image: ${REPOSITORY}/snmp_exporter:${FLOW_VERSION}
+  #   container_name: prometheus-snmp-exporter
+  #   restart: unless-stopped
+  #   ports:
+  #     - 9116:9116
+  #   networks:
+  #     - flow
+  #   volumes:
+  #     - /srv/docker/flow/config/snmp_exporter:/etc/snmp_exporter
 
-  prometheus-blackbox-exporter:
-    image: prom/blackbox-exporter
-    container_name: prometheus-blackboxexporter
-    hostname: prometheus.blackboxexporter
-    restart: unless-stopped
-    ports:
-      - 9115:9115
-    networks:
-      - flow
-    volumes:
-      - /srv/docker/flow/config/blackbox_exporter:/etc/blackbox_exporter
-      - /srv/docker/flow/monitoring/blackbox_exporter:/blackbox_exporter
+  # prometheus-blackbox-exporter:
+  #   image: prom/blackbox-exporter
+  #   container_name: prometheus-blackboxexporter
+  #   hostname: prometheus.blackboxexporter
+  #   restart: unless-stopped
+  #   ports:
+  #     - 9115:9115
+  #   networks:
+  #     - flow
+  #   volumes:
+  #     - /srv/docker/flow/config/blackbox_exporter:/etc/blackbox_exporter
+  #     - /srv/docker/flow/monitoring/blackbox_exporter:/blackbox_exporter
+
+  # prometheus-alertmanager:
+  #   image: prom/alertmanager:v0.26.0
+  #   container_name: prometheus-alertmanager
+  #   hostname: prometheus.alertmanager
+  #   restart: unless-stopped
+  #   ports:
+  #     - 9093:9093
+  #   networks:
+  #     - flow
+  #   volumes:
+  #     - /srv/docker/flow/config/alertmanager:/etc/alertmanager
+  #     - /srv/docker/flow/monitoring/alertmanager:/alertmanager      
