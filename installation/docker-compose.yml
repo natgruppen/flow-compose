@@ -25,7 +25,7 @@ services:
       - SAVE_IF_EMPTY=Create new address
       - SAVE_IF_CHANGED=Update address connection
       - WRONG_ADDRESS=\\u003cul\\u003e \\u003cli\\u003eÄr jag på rätt adress??\\u003c/li\\u003e \\u003cli\\u003eÄr insvetstning gjord enlig utskarvningsplan(färgordning, tub, etc…)?\\u003c/li\\u003e \\u003cli\\u003eÄr adressen terminerad i rätt ODF-port i nod?\\u003c/li\\u003e\n\\u003cli\\u003eÄr inpatchning till switch korrekt enligt panelkort?\\u003c/li\\u003e \\u003c/ul\\u003e
-      - SEARCH_ENABLED=0
+      - SEARCH_ENABLED=1
       - ENTER_MANUALLY_ENABLED=0
       - CHECK_FIBER_OUTLET_ENABLED=0
       - PORTAL_URL=/portal/
