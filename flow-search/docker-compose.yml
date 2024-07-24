@@ -1,16 +1,17 @@
 services:
-  # flow-search:
-  #   container_name: flow-search
-  #   image: ${REPOSITORY}/flow-search:2024.1.0
-  #   networks:
-  #     - flow
-  #   #ports:
-  #   environment:
-  #     - TZ=${TZ}
-  #   volumes:
-  #     - /srv/docker/flow/config:/etc/flow
-  #     - /srv/docker/elasticsearch/data:/usr/share/elasticsearch/data
-  #     - /srv/docker/elasticsearch/config:/usr/share/elasticsearch/config
+#  flow-search:
+#    container_name: flow-search
+#    hostname: flow.search.old
+#    image: ${REPOSITORY}/flow-search:2024.1.0
+#    networks:
+#      - flow
+#    #ports:
+#    environment:
+#      - TZ=${TZ}
+#    volumes:
+#      - /srv/docker/flow/config:/etc/flow
+#      - /srv/docker/elasticsearch/data:/usr/share/elasticsearch/data
+#      - /srv/docker/elasticsearch/config:/usr/share/elasticsearch/config
   
   flow-search-8:
     container_name: flow-search-8

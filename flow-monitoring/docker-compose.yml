@@ -54,11 +54,11 @@ services:
       - traefik
     labels:
       - traefik.enable=true
-      - traefik.http.routers.Flow-Monitoring-Icons.entrypoints=flow-monitoring-prometheusalertmanager
-      - traefik.http.routers.Flow-Monitoring-Icons.rule=Host(`${FLOW_DOMAIN}`)
-      - traefik.http.routers.Flow-Monitoring-Icons.tls=true
-      - traefik.http.routers.Flow-Monitoring-Icons.tls.certresolver=letsencrypt
-      - traefik.http.services.Flow-Monitoring-Icons.loadbalancer.server.port=8003
+      - traefik.http.routers.Flow-Monitoring-PrometheusAlertManager.entrypoints=flow-monitoring-prometheusalertmanager
+      - traefik.http.routers.Flow-Monitoring-PrometheusAlertManager.rule=Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Monitoring-PrometheusAlertManager.tls=true
+      - traefik.http.routers.Flow-Monitoring-PrometheusAlertManager.tls.certresolver=letsencrypt
+      - traefik.http.services.Flow-Monitoring-PrometheusAlertManager.loadbalancer.server.port=8003
     environment:
       - TZ=${TZ}
       - JAVA_OPTS=${JAVA_OPTS}
