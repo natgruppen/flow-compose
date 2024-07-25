@@ -11,7 +11,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.Installation.entrypoints=https
-      - traefik.http.routers.Installation.rule=PathPrefix(`/api/portal`) && Host(`${PORTAL_DOMAIN}`)
+      - traefik.http.routers.Installation.rule=( PathPrefix(`/api/portal`) || PathPrefix(`/portal`) ) && Host(`${PORTAL_DOMAIN}`)
       - traefik.http.routers.Installation.tls=true
       - traefik.http.services.Installation.loadbalancer.server.port=8081
       - traefik.http.routers.Installation.tls.certresolver=letsencrypt
