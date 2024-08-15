@@ -4,7 +4,10 @@ services:
     build:
       dockerfile_inline: |
         FROM ${REPOSITORY}/flow-scheduler:${FLOW_VERSION}
-        RUN apk add py3-xmltodict py3-icalendar
+        RUN apk add py3-xmltodict py3-icalendar py3-shapely patch
+        RUN pip3 install sweref99 --no-cache-dir --break-system-packages
+        COPY storage.py.patch /
+        RUN cd /opt/flow-scheduler/runner/python/library/api && patch -p0 </storage.py.patch
 #    image: ${REPOSITORY}/flow-scheduler:${FLOW_VERSION}
     hostname: flow.scheduler
     restart: unless-stopped
@@ -35,7 +38,10 @@ services:
     build:
       dockerfile_inline: |
         FROM ${REPOSITORY}/flow-scheduler:${FLOW_VERSION}
-        RUN apk add py3-xmltodict py3-icalendar
+        RUN apk add py3-xmltodict py3-icalendar py3-shapely patch
+        RUN pip3 install sweref99 --no-cache-dir --break-system-packages
+        COPY storage.py.patch /
+        RUN cd /opt/flow-scheduler/runner/python/library/api && patch -p0 </storage.py.patch
 #    image: ${REPOSITORY}/flow-scheduler:${FLOW_VERSION}
     hostname: flow.runner
     restart: unless-stopped
