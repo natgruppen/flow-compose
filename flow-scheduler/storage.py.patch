@@ -1,0 +1,27 @@
+--- storage.py.bak
++++ storage.py
+@@ -6,11 +6,7 @@
+ class Storage:
+   def download(self, fileId, fileExtension='tmp'):
+     requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+-    system_ip = Flow.getSetting('system.ip', None)
+-    if system_ip is None:
+-      Flow.end(99, 'Settings "system.ip" is not configured')
+-
+-    url = 'https://%s/storage/get' % system_ip
++    url = "http://flow-storage:8001/storage/get"
+     filename = '/tmp/' + ''.join(random.choices(string.ascii_uppercase + string.digits, k=12)) + '.' + fileExtension
+     parameters = {"file_id": fileId}
+     with open(filename, 'wb') as f:
+@@ -23,11 +19,7 @@
+     os.remove(filename)
+
+   def upload(self, file, filename, mediatype='text'):
+-    system_ip = Flow.getSetting('system.ip', None)
+-    if system_ip is None:
+-      Flow.end(99, 'Settings "system.ip" is not configured')
+-
+-    url = "https://%s/storage/put" % system_ip
++    url = "http://flow-storage:8001/storage/put"
+     urllib3.disable_warnings()
+     http = urllib3.PoolManager(cert_reqs='CERT_NONE')

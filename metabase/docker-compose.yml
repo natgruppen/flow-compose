@@ -10,18 +10,18 @@ services:
     environment:
       - JAVA_TIMEZONE=${TZ}
       - TZ=${TZ}
-      - MD_B_TYPE=postgres
-      - MD_DB_DBNAME=metabase
-      - MD_DB_PORT="5432"
-      - MD_DB_USER=${DATABASE_USER}
-      - MD_DB_PASS=${DATABASE_PASSWORD}
-      - MD_DB_HOST=${HOST_IP}
+      - MB_DB_TYPE=postgres
+      - MB_DB_DBNAME=metabase
+      - MB_DB_PORT=5432
+      - MB_DB_USER=${DATABASE_USER}
+      - MB_DB_PASS=${DATABASE_PASSWORD}
+      - MB_DB_HOST=postgresql
     labels:
       - traefik.enable=true
       - traefik.http.routers.Metabase.entrypoints=https
       - traefik.http.routers.Metabase.rule=Host(`${METABASE_DOMAIN}`)
       - traefik.http.routers.Metabase.tls=true
       - traefik.http.routers.Metabase.tls.certresolver=letsencrypt
-      - traefik.http.services.Metabase.loadbalancer.server.port=80  
+      - traefik.http.services.Metabase.loadbalancer.server.port=3000
     depends_on:
       - postgresql
