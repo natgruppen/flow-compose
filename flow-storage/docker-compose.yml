@@ -12,10 +12,17 @@ services:
       - JAVA_OPTS=${JAVA_OPTS}
     labels:
       - traefik.enable=true
+      - traefik.http.routers.Flow-Storage-Api.entrypoints=https
+      - traefik.http.routers.Flow-Storage-Api.rule=PathPrefix(`/api/storage`) && Host(`${FLOW_DOMAIN}`)
+      - traefik.http.routers.Flow-Storage-Api.tls=true
+      - traefik.http.routers.Flow-Storage-Api.tls.certresolver=letsencrypt
+      - traefik.http.routers.Flow-Storage-Api.service=Flow-Storage-Api
+      - traefik.http.services.Flow-Storage-Api.loadbalancer.server.port=80
       - traefik.http.routers.Flow-Storage.entrypoints=https
       - traefik.http.routers.Flow-Storage.rule=PathPrefix(`/storage`) && Host(`${FLOW_DOMAIN}`)
       - traefik.http.routers.Flow-Storage.tls=true
       - traefik.http.routers.Flow-Storage.tls.certresolver=letsencrypt
+      - traefik.http.routers.Flow-Storage.service=Flow-Storage
       - traefik.http.services.Flow-Storage.loadbalancer.server.port=8001
     volumes:
       - /srv/docker/flow/config:/etc/flow
