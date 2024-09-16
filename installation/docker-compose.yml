@@ -1,43 +1,44 @@
 services:
-#  installation:
-#    container_name: installation
+  installation:
+    container_name: installation
+    image: install.maintrac.se/release/installation:2023.2.3
 #    image: install.maintrac.se/release/installation:${FLOW_VERSION}
-#    hostname: flow.installation
-#    restart: unless-stopped
-#    networks:
-#      - flow
-#      - traefik
-#    labels:
-#      - traefik.enable=true
-#      - traefik.http.routers.Installation.entrypoints=https
-#      - traefik.http.routers.Installation.rule=( PathPrefix(`/api/portal`) || PathPrefix(`/portal`) ) && Host(`${PORTAL_DOMAIN}`)
-#      - traefik.http.routers.Installation.tls=true
-#      - traefik.http.services.Installation.loadbalancer.server.port=8081
-#      - traefik.http.routers.Installation.tls.certresolver=letsencrypt
-#    environment:
-#      - PASSWORD_RECOVERY_ENABLED=1
-#      - TICKETS_ENABLED=0
-#      - BILLING_EXPORT_ENABLED=0
-#      - NA_INTEGRATION=0
-#      - FLOW_INTEGRATION=1
-#      - SAVE_IF_EXISTS=This address is correct
-#      - SAVE_IF_EMPTY=Create new address
-#      - SAVE_IF_CHANGED=Update address connection
-#      - WRONG_ADDRESS=\\u003cul\\u003e \\u003cli\\u003eÄr jag på rätt adress??\\u003c/li\\u003e \\u003cli\\u003eÄr insvetstning gjord enlig utskarvningsplan(färgordning, tub, etc…)?\\u003c/li\\u003e \\u003cli\\u003eÄr adressen terminerad i rätt ODF-port i nod?\\u003c/li\\u003e\n\\u003cli\\u003eÄr inpatchning till switch korrekt enligt panelkort?\\u003c/li\\u003e \\u003c/ul\\u003e
-#      - SEARCH_ENABLED=1
-#      - ENTER_MANUALLY_ENABLED=0
-#      - CHECK_FIBER_OUTLET_ENABLED=0
-#      - PORTAL_URL=/portal/
-#      - INFORMATION_URL=/info
-#      - ACTIVATION_URL=
-#      - REDIRECT_AFTER_INSTALL_ENABLED=0
-#      - PORTAL_LABELS=Published
-#      - INSTALLATION_EXCLUDE_LABEL=
-#      - INSTALLATION_EXCLUDE_VALUE=Blocked
-#      - TZ=${TZ}
-#      - JAVA_OPTS=${JAVA_OPTS}
-#    volumes:
-#      - /srv/docker/flow/config:/etc/flow
+    hostname: flow.installation
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.Installation.entrypoints=https
+      - traefik.http.routers.Installation.rule=( PathPrefix(`/api/portal`) || PathPrefix(`/portal`) ) && Host(`${PORTAL_DOMAIN}`)
+      - traefik.http.routers.Installation.tls=true
+      - traefik.http.services.Installation.loadbalancer.server.port=8081
+      - traefik.http.routers.Installation.tls.certresolver=letsencrypt
+    environment:
+      - PASSWORD_RECOVERY_ENABLED=1
+      - TICKETS_ENABLED=0
+      - BILLING_EXPORT_ENABLED=0
+      - NA_INTEGRATION=0
+      - FLOW_INTEGRATION=1
+      - SAVE_IF_EXISTS=This address is correct
+      - SAVE_IF_EMPTY=Create new address
+      - SAVE_IF_CHANGED=Update address connection
+      - WRONG_ADDRESS=\\u003cul\\u003e \\u003cli\\u003eÄr jag på rätt adress??\\u003c/li\\u003e \\u003cli\\u003eÄr insvetstning gjord enlig utskarvningsplan(färgordning, tub, etc…)?\\u003c/li\\u003e \\u003cli\\u003eÄr adressen terminerad i rätt ODF-port i nod?\\u003c/li\\u003e\n\\u003cli\\u003eÄr inpatchning till switch korrekt enligt panelkort?\\u003c/li\\u003e \\u003c/ul\\u003e
+      - SEARCH_ENABLED=1
+      - ENTER_MANUALLY_ENABLED=0
+      - CHECK_FIBER_OUTLET_ENABLED=0
+      - PORTAL_URL=/portal/
+      - INFORMATION_URL=/info
+      - ACTIVATION_URL=
+      - REDIRECT_AFTER_INSTALL_ENABLED=0
+      - PORTAL_LABELS=Published
+      - INSTALLATION_EXCLUDE_LABEL=
+      - INSTALLATION_EXCLUDE_VALUE=Blocked
+      - TZ=${TZ}
+      - JAVA_OPTS=${JAVA_OPTS}
+    volumes:
+      - /srv/docker/flow/config:/etc/flow
 
   installation-gui:
     container_name: installation-gui

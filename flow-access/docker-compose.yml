@@ -15,14 +15,14 @@ services:
       - traefik.http.services.Flow-Access.loadbalancer.server.port=8080
       - traefik.http.routers.Flow-Access.tls.certresolver=letsencrypt
       - traefik.http.routers.Flow-Access.service=Flow-Access
-      - traefik.http.routers.Flow-Access-Portal.entrypoints=https
-      - traefik.http.routers.Flow-Access-Portal.rule=( PathPrefix(`/api/portal`) || PathPrefix(`/portal`) ) && Host(`${PORTAL_DOMAIN}`)
-      - traefik.http.routers.Flow-Access-Portal.tls=true
-      - traefik.http.services.Flow-Access-Portal.loadbalancer.server.port=8081
-      - traefik.http.routers.Flow-Access-Portal.service=Flow-Access-Portal
-      - traefik.http.routers.Flow-Access-Portal.tls.certresolver=letsencrypt
+#      - traefik.http.routers.Flow-Access-Portal.entrypoints=https
+#      - traefik.http.routers.Flow-Access-Portal.rule=( PathPrefix(`/api/portal`) || PathPrefix(`/portal`) ) && Host(`${PORTAL_DOMAIN}`)
+#      - traefik.http.routers.Flow-Access-Portal.tls=true
+#      - traefik.http.services.Flow-Access-Portal.loadbalancer.server.port=8081
+#      - traefik.http.routers.Flow-Access-Portal.service=Flow-Access-Portal
+#      - traefik.http.routers.Flow-Access-Portal.tls.certresolver=letsencrypt
     environment:
-      - PORTALS_DISABLED=0
+      - PORTALS_DISABLED=1
       - NA_INTEGRATION=0
       - FLOW_INTEGRATION=1
       - PASSWORD_RECOVERY_ENABLED=1
