@@ -1,8 +1,7 @@
 services:
   flow-product:
     container_name: flow-product
-    # Revert to 2024.1.1 for on-api 2.3
-    image: ${REPOSITORY}/flow-product:2024.1.1
+    image: ${REPOSITORY}/flow-product:${FLOW_VERSION}
     hostname: flow.product
     restart: unless-stopped
     networks:
