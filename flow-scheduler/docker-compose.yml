@@ -29,9 +29,11 @@ services:
       - /srv/docker/flow/scheduler:/data
     depends_on:
       flow-auth:
-        condition: service_started
+        condition: service_healthy
       deepstream:
         condition: service_healthy
+      postgresql:
+        condition: service_started
 
   flow-runner:
     container_name: flow-runner
@@ -64,6 +66,8 @@ services:
       - /srv/docker/flow/scheduler:/data
     depends_on:
       flow-auth:
-        condition: service_started
+        condition: service_healthy
       deepstream:
-        condition: service_healthy  
+        condition: service_healthy
+      postgresql:
+        condition: service_started

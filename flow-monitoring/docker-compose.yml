@@ -21,6 +21,13 @@ services:
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/monitoring:/data
+    depends_on:
+      flow-auth:
+        condition: service_healthy
+      deepstream:
+        condition: service_healthy
+      postgresql:
+        condition: service_started
   
 #  flow-monitoring-icons:
 #    container_name: flow-monitoring-icons

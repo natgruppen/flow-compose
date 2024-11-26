@@ -23,10 +23,16 @@ services:
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/auth:/data
+    healthcheck:
+      test: nc localhost 8000
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
  #   healthcheck:
  #     disable: true
     depends_on:
       postgresql:
         condition: service_started
-#      deepstream:
-#        condition: service_healthy
+      deepstream:
+        condition: service_healthy

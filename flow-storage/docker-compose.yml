@@ -29,6 +29,8 @@ services:
       - /srv/docker/flow/storage:/data
     depends_on:
       flow-auth:
-        condition: service_started
+        condition: service_healthy
       deepstream:
         condition: service_healthy
+      postgresql:
+        condition: service_started
