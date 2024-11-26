@@ -21,3 +21,7 @@ services:
     volumes:
       - /srv/docker/traefik:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock      
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"

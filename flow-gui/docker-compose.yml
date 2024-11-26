@@ -21,3 +21,7 @@ services:
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/gui:/data
+    logging:
+      driver: loki
+      options:
+        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"
