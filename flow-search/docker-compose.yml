@@ -31,10 +31,6 @@ services:
       - /srv/docker/elasticsearch8/data:/usr/share/elasticsearch/data
 #      - /srv/docker/elasticsearch8/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
       - /srv/docker/elasticsearch8/config:/usr/share/elasticsearch/config
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"
   
   flow-search-rest:
     container_name: flow-search-rest
@@ -56,7 +52,3 @@ services:
       - JAVA_OPTS=${JAVA_OPTS}
     volumes:
       - /srv/docker/flow/config:/etc/flow
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"

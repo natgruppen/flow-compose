@@ -25,7 +25,3 @@ services:
       - traefik.http.services.Metabase.loadbalancer.server.port=3000
     depends_on:
       - postgresql
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"

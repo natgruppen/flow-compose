@@ -25,10 +25,7 @@ services:
         condition: service_started
       deepstream:
         condition: service_healthy
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"
+        
 
   logstash:
     container_name: logstash
@@ -45,7 +42,3 @@ services:
     depends_on:
       - flow-search-8
       - flow-log
-    logging:
-      driver: loki
-      options:
-        loki-url: "http://10.5.118.163:3100/loki/api/v1/push"
