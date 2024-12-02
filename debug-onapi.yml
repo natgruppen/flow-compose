@@ -1,0 +1,27 @@
+services:
+  access-onapi-debug:
+    container_name: access-onapi-debug
+    build:
+      dockerfile_inline: |
+        FROM alpine
+        RUN apk add tcpflow
+    network_mode: service:access
+    volumes:
+      - /srv/debug/access:/debug
+    command: sh -c "tcpflow -i eth1 -c -e http 'port 8083' >/debug/log.txt"
+    depends_on:
+      - access
+
+  flow-access-onapi-debug:
+    container_name: flow-access-onapi-debug
+    build:
+      dockerfile_inline: |
+        FROM alpine
+        RUN apk add tcpflow
+    network_mode: service:flow-access
+    volumes:
+      - /srv/debug/flow-access:/debug
+    command: sh -c "tcpflow -i eth1 -c -e http 'port 8080' >/debug/log.txt"
+    depends_on:
+      - flow-access
+      

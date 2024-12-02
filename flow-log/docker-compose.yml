@@ -24,10 +24,9 @@ services:
       - /srv/docker/flow/log:/data
     depends_on:
       flow-auth:
-        condition: service_started
+        condition: service_healthy
       deepstream:
         condition: service_healthy
-        
 
   logstash:
     container_name: logstash
