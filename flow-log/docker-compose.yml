@@ -17,6 +17,8 @@ services:
       - traefik.http.routers.Flow-Log.tls=true
       - traefik.http.routers.Flow-Log.tls.certresolver=letsencrypt
       - traefik.http.services.Flow-Log.loadbalancer.server.port=80
+    ports:
+      - 20514:10514
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/flow/log:/data
