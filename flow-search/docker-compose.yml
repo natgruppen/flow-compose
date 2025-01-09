@@ -29,6 +29,7 @@ services:
     volumes:
       - /srv/docker/flow/config:/etc/flow
       - /srv/docker/elasticsearch8/data:/usr/share/elasticsearch/data
+      - /srv/docker/elasticsearch8/snapshots:/backup/snapshots
 #      - /srv/docker/elasticsearch8/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
       - /srv/docker/elasticsearch8/config:/usr/share/elasticsearch/config
   

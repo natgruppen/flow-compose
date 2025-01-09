@@ -14,7 +14,7 @@ services:
       - traefik.http.routers.Prometheus.tls=true
       - traefik.http.routers.Prometheus.tls.certresolver=letsencrypt
       - traefik.http.services.Prometheus.loadbalancer.server.port=9090
-    command: --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle --storage.tsdb.retention=${PROMETHEUS_RETENTION} --storage.tsdb.path /prometheus
+    command: --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle --storage.tsdb.retention=${PROMETHEUS_RETENTION} --storage.tsdb.path /prometheus --web.enable-admin-api
     volumes:
       - /srv/docker/flow/config/prometheus:/etc/prometheus
       - /srv/docker/flow/monitoring/prometheus:/prometheus
