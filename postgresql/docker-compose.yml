@@ -10,5 +10,11 @@ services:
       - 5432:5432
     volumes:
       - ${PREFIX}/srv/docker/postgresql-16:/var/lib/postgresql/data
+      - type: tmpfs
+        target: /dev/shm
+        tmpfs:
+          size: 256M
+    user: postgres
+    entrypoint: postgres
     environment:
       - POSTGRES_PASSWORD=${DATABASE_MASTER_PASSWORD}
