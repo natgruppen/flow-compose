@@ -15,6 +15,6 @@ services:
         tmpfs:
           size: 256M
     user: postgres
-    entrypoint: postgres
+    entrypoint: postgres -c jit=off -c max_connections=2000 -c max_worker_processes=8 -c max_parallel_workers_per_gather=0
     environment:
       - POSTGRES_PASSWORD=${DATABASE_MASTER_PASSWORD}
