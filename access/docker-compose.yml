@@ -14,6 +14,7 @@ services:
       - traefik.http.routers.Access.tls=true
       - traefik.http.routers.Access.tls.certresolver=letsencrypt
       - traefik.http.services.Access.loadbalancer.server.port=8083
+      - traefik.http.routers.Access.middlewares=ask-opa@file
     environment:
       - ENDPOINTS_LOCATION=
       - PASSWORD_RECOVERY_ENABLED=1

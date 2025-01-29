@@ -1,0 +1,13 @@
+services:
+  opa:
+    container_name: opa
+    image: openpolicyagent/opa:1.1.0
+    restart: unless-stopped
+    networks:
+      - flow
+      - traefik
+    command: run --addr 0.0.0.0:8181 --log-format text --log-level debug --server /srv/opa/flow.rego
+    env_file:
+      - opa.env
+    volumes:
+      - /srv/docker/opa:/srv/opa
