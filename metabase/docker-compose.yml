@@ -1,6 +1,6 @@
 services:
   metabase:
-    image: metabase/metabase:v0.47.4
+    image: metabase/metabase:v0.47.13
     container_name: metabase
     hostname: metabase
     restart: unless-stopped
