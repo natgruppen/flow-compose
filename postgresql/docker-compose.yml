@@ -15,7 +15,8 @@ services:
         tmpfs:
           size: 256M
     user: postgres
-    entrypoint: postgres -c jit=off -c max_connections=2000 -c max_worker_processes=8 -c max_parallel_workers_per_gather=0
+#    entrypoint: postgres -c jit=off -c max_connections=2000 -c max_worker_processes=8 -c max_parallel_workers_per_gather=0
+    entrypoint: postgres -c jit=off -c max_connections=2000 -c shared_buffers=16GB -c effective_cache_size=48GB -c maintenance_work_mem=2GB -c checkpoint_completion_target=0.9 -c wal_buffers=16MB -c default_statistics_target=100 -c random_page_cost=1.1 -c effective_io_concurrency=200 -c work_mem=2097kB -c huge_pages=try -c min_wal_size=1GB -c max_wal_size=4GB -c max_worker_processes=8 -c max_parallel_workers_per_gather=4 -c max_parallel_workers=8 -c max_parallel_maintenance_workers=4
     environment:
       - POSTGRES_PASSWORD=${DATABASE_MASTER_PASSWORD}
       - POSTGRES_USER=postgres
